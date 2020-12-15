@@ -1,8 +1,13 @@
 # javafx-hodgepodge
 
-Several JavaFX experiments with [IntelliJ IDEA](https://www.jetbrains.com/idea) IDE, without [Maven](https://maven.apache.org).
+Several [JavaFX](https://openjfx.io) 11 experiments, without [Maven](https://maven.apache.org) support.
 
-Setup IntelliJ IDEA following [this guide](https://www.jetbrains.com/help/idea/javafx.html).
+Thorough documentation sources are listed within code comments.
 
-Further tips for [IntelliJ IDEA](https://www.jetbrains.com/idea):
-* in order to correctly handle resources, mark `resources` folder as **Resources Root**, as per [this guide](https://www.jetbrains.com/help/idea/content-roots.html#folder-categories)
+---
+
+### Tips for [IntelliJ IDEA](https://www.jetbrains.com/idea) IDE
+
+* setup by following [this guide](https://www.jetbrains.com/help/idea/javafx.html)
+* in order to correctly handle resources, mark `resources` folder as **Resources Root**,
+  as per [this guide](https://www.jetbrains.com/help/idea/content-roots.html#folder-categories)

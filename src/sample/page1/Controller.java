@@ -52,8 +52,8 @@ public class Controller implements Initializable {
      */
     public void handleButton1Action() {
 
-        // button1 cannot be disabled with button1.setDisable(true) and re-enabled with button1.setDisable(false)
-        // because the asynchronous execution makes both statements executed immediately,
+        // button1 cannot be disabled by button1.setDisable(true) and re-enabled by button1.setDisable(false):
+        // the asynchronous execution makes both statements executed immediately,
         // independently from tasks run by ExecutorService.
 
         for (DataModel record : table.getItems()) {
@@ -100,7 +100,8 @@ public class Controller implements Initializable {
                 }
             };
             record.dataProperty().bind(task.messageProperty());
-            // javafx.concurrent.Task cannot be used with ExecutorService.invokeAll(), it must be wrapped into a Callable.
+            // javafx.concurrent.Task cannot be used with ExecutorService.invokeAll(),
+            // it must therefore be wrapped into a Callable.
             Callable<Integer> callable = () -> {
                 task.run();
                 return task.getValue();
