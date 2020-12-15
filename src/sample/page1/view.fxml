@@ -3,24 +3,32 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.control.Button?>
 
+<?import javafx.scene.layout.FlowPane?>
 <GridPane fx:controller="sample.page1.Controller"
           xmlns:fx="http://javafx.com/fxml"
           stylesheets="@style.css">
-    <!-- The @ symbol indicates the style sheet is in the same directory as the FXML file -->
+    <!-- The "@" symbol means the style sheet is in the same directory as the FXML file -->
     <!-- @see https://www.callicoder.com/javafx-css-tutorial -->
 
-    <Label text="Hello!" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+    <FlowPane GridPane.rowIndex="0" GridPane.columnIndex="0">
+        <Label text="Hello!"/>
+        <Button text="Download (execute)" fx:id="button1" onAction="#handleButton1Action"/>
+        <Button text="Download (invokeAll)" fx:id="button2" onAction="#handleButton2Action" disable="true"/>
+    </FlowPane>
 
     <TableView fx:id="table"
-               GridPane.columnIndex="0" GridPane.rowIndex="1">
+               GridPane.rowIndex="1" GridPane.columnIndex="0">
         <columns>
+            <!-- Columns are bound to data -->
+            <!-- @see https://docs.oracle.com/javafx/2/fxml_get_started/fxml_tutorial_intermediate.htm -->
             <TableColumn text="URL">
                 <cellValueFactory>
                     <PropertyValueFactory property="url"/>
                 </cellValueFactory>
             </TableColumn>
-            <TableColumn text="Result">
+            <TableColumn text="Data">
                 <cellValueFactory>
                     <PropertyValueFactory property="data"/>
                 </cellValueFactory>

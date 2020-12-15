@@ -3,3 +3,11 @@ GridPane {
     -fx-hgap: 10;
     -fx-vgap: 10;
 }
+
+FlowPane {
+    -fx-hgap: 10;
+}
+
+TableView {
+    -fx-pref-width: 800;
+}
