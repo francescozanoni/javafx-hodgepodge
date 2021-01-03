@@ -16,6 +16,11 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+// Within methods running ExecutorService.execute(), buttons cannot be
+// disabled by buttonN.setDisable(true) and re-enabled by buttonN.setDisable(false):
+// the asynchronous execution makes both statements executed immediately,
+// independently from code run by ExecutorService.
+
 public class Controller implements Initializable {
 
     @FXML
@@ -50,17 +55,13 @@ public class Controller implements Initializable {
     /**
      * Download all URLs and display content length, with many ExecutorService's using execute().
      *
-     * With data binding.
+     * With data binding between record bean and asynchronous code.
      *
      * THIS SOLUTION DOES NOT FREEZE THE UI: IT IS ASYNCHRONOUS.
      *
      * @see <a href="https://deitel.com/java-9-for-programmers/"></a>
      */
     public void handleButton1Action() {
-
-        // button1 cannot be disabled by button1.setDisable(true) and re-enabled by button1.setDisable(false):
-        // the asynchronous execution makes both statements executed immediately,
-        // independently from tasks run by ExecutorService.
 
         for (TableRecordBean recordBean : table.getItems()) {
             Task<Integer> task = new Task<>() {
@@ -84,17 +85,11 @@ public class Controller implements Initializable {
     /**
      * Download all URLs and display content length, with many ExecutorService's using execute().
      *
-     * Without data binding.
+     * Without data binding between record bean and asynchronous code.
      *
      * THIS SOLUTION DOES NOT FREEZE THE UI: IT IS ASYNCHRONOUS.
-     *
-     * @see <a href="https://deitel.com/java-9-for-programmers/"></a>
      */
     public void handleButton2Action() {
-
-        // button2 cannot be disabled by button2.setDisable(true) and re-enabled by button2.setDisable(false):
-        // the asynchronous execution makes both statements executed immediately,
-        // independently from tasks run by ExecutorService.
 
         for (TableRecordBean recordBean : table.getItems()) {
 
@@ -104,9 +99,10 @@ public class Controller implements Initializable {
                 recordBean.dataProperty().unbind();
             }
 
+            recordBean.setData("...");
+
             ExecutorService executor = Executors.newFixedThreadPool(1);
             executor.execute(() -> {
-                recordBean.setData("...");
                 int result = Utils.getUrlContent(recordBean.getUrl()).length();
                 recordBean.setData(String.valueOf(result));
             });

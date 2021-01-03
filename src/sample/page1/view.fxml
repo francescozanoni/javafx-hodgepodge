@@ -14,8 +14,8 @@
 
     <FlowPane GridPane.rowIndex="0" GridPane.columnIndex="0">
         <Label text="Hello!"/>
-        <Button text="Download (execute) - data binding" fx:id="button1" onAction="#handleButton1Action"/>
-        <Button text="Download (execute)" fx:id="button2" onAction="#handleButton2Action"/>
+        <Button text="Download (execute task)" fx:id="button1" onAction="#handleButton1Action"/>
+        <Button text="Download (execute lambda)" fx:id="button2" onAction="#handleButton2Action"/>
         <Button text="Download (invokeAll)" fx:id="button3" onAction="#handleButton3Action" disable="true"/>
     </FlowPane>
 
