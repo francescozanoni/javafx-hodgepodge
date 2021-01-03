@@ -100,7 +100,9 @@ public class Controller implements Initializable {
 
             // This is required, in order to avoid "java.lang.RuntimeException: A bound value cannot be set.",
             // occurring after handleButton1Action() execution.
-            recordBean.dataProperty().unbind();
+            if (recordBean.dataProperty().isBound()) {
+                recordBean.dataProperty().unbind();
+            }
 
             ExecutorService executor = Executors.newFixedThreadPool(1);
             executor.execute(() -> {
