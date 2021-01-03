@@ -20,7 +20,7 @@ import java.util.concurrent.Executors;
 public class Controller implements Initializable {
 
     @FXML
-    TableView<DataModel> table;
+    TableView<TableRecordBean> table;
 
     @FXML
     Button button1;
@@ -32,13 +32,15 @@ public class Controller implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         // URLs are loaded to table, via data model binding.
-        ObservableList<DataModel> records = table.getItems();
+
         Properties config = Utils.getConfig("config.properties");
-        Enumeration<Object> keys = config.keys();
-        while (keys.hasMoreElements()) {
-            String url = config.getProperty((String) keys.nextElement());
-            String data = "";
-            records.add(new DataModel(url, data));
+        ObservableList<TableRecordBean> recordItemCollection = table.getItems();
+
+        for (Object url : config.values()) {
+            TableRecordBean recordBean = new TableRecordBean();
+            recordBean.setUrl(String.valueOf(url));
+            recordBean.setData("");
+            recordItemCollection.add(recordBean);
         }
 
     }
@@ -56,18 +58,18 @@ public class Controller implements Initializable {
         // the asynchronous execution makes both statements executed immediately,
         // independently from tasks run by ExecutorService.
 
-        for (DataModel record : table.getItems()) {
+        for (TableRecordBean recordBean : table.getItems()) {
             Task<Integer> task = new Task<>() {
                 @Override
                 protected Integer call() {
                     updateMessage("...");
-                    int result = Utils.getUrlContent(record.getUrl()).length();
+                    int result = Utils.getUrlContent(recordBean.getUrl()).length();
                     updateMessage(String.valueOf(result));
                     // javafx.concurrent.Task must return a value, even if unused.
                     return result;
                 }
             };
-            record.dataProperty().bind(task.messageProperty());
+            recordBean.dataProperty().bind(task.messageProperty());
             ExecutorService executor = Executors.newFixedThreadPool(1);
             executor.execute(task);
             executor.shutdown();
@@ -88,7 +90,7 @@ public class Controller implements Initializable {
 
         ArrayList<Callable<Integer>> taskList = new ArrayList<>();
 
-        for (DataModel record : table.getItems()) {
+        for (TableRecordBean record : table.getItems()) {
             Task<Integer> task = new Task<>() {
                 @Override
                 protected Integer call() {

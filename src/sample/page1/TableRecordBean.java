@@ -3,16 +3,15 @@ package sample.page1;
 import javafx.beans.property.SimpleStringProperty;
 
 /**
- * Data model implementing properties for data binding.
+ * Data model representing a table record.
+ *
+ * It implements properties for data binding.
+ *
+ * BE AWARE: this is not a domain class, it's used only to represent a table record.
  *
  * @see <a href="https://docs.oracle.com/javafx/2/binding/jfxpub-binding.htm"></a>
  */
-public class DataModel {
-
-    public DataModel (String url, String data) {
-        this.setUrl(url);
-        this.setData(data);
-    }
+public class TableRecordBean {
 
     // Define variables to store the property
     private final SimpleStringProperty url = new SimpleStringProperty();
