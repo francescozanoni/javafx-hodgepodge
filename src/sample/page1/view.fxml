@@ -37,6 +37,7 @@
         </columns>
     </TableView>
 
+    <!-- Dumb child view, only for inclusion example purpose -->
     <fx:include source="child.fxml"/>
 
     <TableView fx:id="iban_table"
