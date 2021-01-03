@@ -24,24 +24,26 @@ import java.util.concurrent.Executors;
 public class Controller implements Initializable {
 
     @FXML
-    TableView<TableRecordBean> table;
+    TableView<TableRecordBean> url_table;
 
     @FXML
-    Button button1;
+    TableView<IbanBean> iban_table;
 
     @FXML
-    Button button2;
-
-    @FXML
-    Button button3;
+    Button button1, button2, button3;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        // If only "visible" property is set, the element is hidden but it still uses room.
+        // In order to completely hide an element, "managed" property must be bound to "visible" property.
+        // https://stackoverflow.com/questions/28558165/javafx-setvisible-hides-the-element-but-doesnt-rearrange-adjacent-nodes
+        iban_table.managedProperty().bind(iban_table.visibleProperty());
+
         // URLs are loaded to table, via data model binding.
 
         Properties config = Utils.getConfig("config.properties");
-        ObservableList<TableRecordBean> recordItemCollection = table.getItems();
+        ObservableList<TableRecordBean> recordItemCollection = url_table.getItems();
 
         for (Object url : config.values()) {
             TableRecordBean recordBean = new TableRecordBean();
@@ -54,16 +56,16 @@ public class Controller implements Initializable {
 
     /**
      * Download all URLs and display content length, with many ExecutorService's using execute().
-     *
+     * <p>
      * With data binding between record bean and asynchronous code.
-     *
+     * <p>
      * THIS SOLUTION DOES NOT FREEZE THE UI: IT IS ASYNCHRONOUS.
      *
      * @see <a href="https://deitel.com/java-9-for-programmers/"></a>
      */
     public void handleButton1Action() {
 
-        for (TableRecordBean recordBean : table.getItems()) {
+        for (TableRecordBean recordBean : url_table.getItems()) {
             Task<Integer> task = new Task<>() {
                 @Override
                 protected Integer call() {
@@ -84,14 +86,16 @@ public class Controller implements Initializable {
 
     /**
      * Download all URLs and display content length, with many ExecutorService's using execute().
-     *
+     * <p>
      * Without data binding between record bean and asynchronous code.
-     *
+     * <p>
      * THIS SOLUTION DOES NOT FREEZE THE UI: IT IS ASYNCHRONOUS.
      */
     public void handleButton2Action() {
 
-        for (TableRecordBean recordBean : table.getItems()) {
+        iban_table.setVisible(true);
+
+        for (TableRecordBean recordBean : url_table.getItems()) {
 
             // This is required, in order to avoid "java.lang.RuntimeException: A bound value cannot be set.",
             // occurring after handleButton1Action() execution.
@@ -103,8 +107,16 @@ public class Controller implements Initializable {
 
             ExecutorService executor = Executors.newFixedThreadPool(1);
             executor.execute(() -> {
-                int result = Utils.getUrlContent(recordBean.getUrl()).length();
-                recordBean.setData(String.valueOf(result));
+                String result = Utils.getUrlContent(recordBean.getUrl());
+                recordBean.setData(String.valueOf(result.length()));
+                // Single IBAN codes are added to iban_table.
+                // @todo refactor to separate method
+                String[] ibans = IbanExtractor.run(result);
+                for (String iban : ibans) {
+                    IbanBean ibanBean = new IbanBean();
+                    ibanBean.setCode(iban);
+                    iban_table.getItems().add(ibanBean);
+                }
             });
             executor.shutdown();
         }
@@ -113,18 +125,17 @@ public class Controller implements Initializable {
 
     /**
      * Download all URLs and display content length, with a single ExecutorService using invokeAll().
-     *
+     * <p>
      * THIS SOLUTION MUST NOT BE USED: IT IS FASTER, BUT IT FREEZES THE UI AND DOES NOT DISPLAY "...".
      *
      * @throws InterruptedException if anything goes wrong with ExecutorService.invokeAll()
-     *
      * @see <a href="https://stackoverflow.com/questions/46645489/java-invoke-collection-of-tasks-as-with-invokeall"></a>
      */
     public void handleButton3Action() throws InterruptedException {
 
         ArrayList<Callable<Integer>> taskList = new ArrayList<>();
 
-        for (TableRecordBean record : table.getItems()) {
+        for (TableRecordBean record : url_table.getItems()) {
             Task<Integer> task = new Task<>() {
                 @Override
                 protected Integer call() {

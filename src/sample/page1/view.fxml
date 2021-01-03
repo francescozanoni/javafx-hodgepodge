@@ -19,10 +19,10 @@
         <Button text="Download (invokeAll)" fx:id="button3" onAction="#handleButton3Action" disable="true"/>
     </FlowPane>
 
-    <TableView fx:id="table"
+    <TableView fx:id="url_table"
                GridPane.rowIndex="1" GridPane.columnIndex="0">
         <columns>
-            <!-- Columns are bound to data -->
+            <!-- Columns are bound to TableRecordBean properties -->
             <!-- @see https://docs.oracle.com/javafx/2/fxml_get_started/fxml_tutorial_intermediate.htm -->
             <TableColumn text="URL">
                 <cellValueFactory>
@@ -38,5 +38,17 @@
     </TableView>
 
     <fx:include source="child.fxml"/>
+
+    <TableView fx:id="iban_table"
+               GridPane.rowIndex="3" GridPane.columnIndex="0"
+               visible="false">
+        <columns>
+            <TableColumn text="IBAN">
+                <cellValueFactory>
+                    <PropertyValueFactory property="code"/>
+                </cellValueFactory>
+            </TableColumn>
+        </columns>
+    </TableView>
 
 </GridPane>
