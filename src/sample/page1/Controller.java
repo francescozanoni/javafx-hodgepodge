@@ -10,7 +10,6 @@ import sample.Utils;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.concurrent.Callable;
@@ -27,6 +26,9 @@ public class Controller implements Initializable {
 
     @FXML
     Button button2;
+
+    @FXML
+    Button button3;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -47,6 +49,8 @@ public class Controller implements Initializable {
 
     /**
      * Download all URLs and display content length, with many ExecutorService's using execute().
+     *
+     * With data binding.
      *
      * THIS SOLUTION DOES NOT FREEZE THE UI: IT IS ASYNCHRONOUS.
      *
@@ -78,6 +82,36 @@ public class Controller implements Initializable {
     }
 
     /**
+     * Download all URLs and display content length, with many ExecutorService's using execute().
+     *
+     * Without data binding.
+     *
+     * THIS SOLUTION DOES NOT FREEZE THE UI: IT IS ASYNCHRONOUS.
+     *
+     * @see <a href="https://deitel.com/java-9-for-programmers/"></a>
+     */
+    public void handleButton2Action() {
+
+        // BE AWARE: this method cannot be executed after handleButton1Action() because it triggers below exception:
+        // "java.lang.RuntimeException: A bound value cannot be set."
+
+        // button2 cannot be disabled by button2.setDisable(true) and re-enabled by button2.setDisable(false):
+        // the asynchronous execution makes both statements executed immediately,
+        // independently from tasks run by ExecutorService.
+
+        for (TableRecordBean recordBean : table.getItems()) {
+            ExecutorService executor = Executors.newFixedThreadPool(1);
+            executor.execute(() -> {
+                recordBean.setData("...");
+                int result = Utils.getUrlContent(recordBean.getUrl()).length();
+                recordBean.setData(String.valueOf(result));
+            });
+            executor.shutdown();
+        }
+
+    }
+
+    /**
      * Download all URLs and display content length, with a single ExecutorService using invokeAll().
      *
      * THIS SOLUTION MUST NOT BE USED: IT IS FASTER, BUT IT FREEZES THE UI AND DOES NOT DISPLAY "...".
@@ -86,7 +120,7 @@ public class Controller implements Initializable {
      *
      * @see <a href="https://stackoverflow.com/questions/46645489/java-invoke-collection-of-tasks-as-with-invokeall"></a>
      */
-    public void handleButton2Action() throws InterruptedException {
+    public void handleButton3Action() throws InterruptedException {
 
         ArrayList<Callable<Integer>> taskList = new ArrayList<>();
 
