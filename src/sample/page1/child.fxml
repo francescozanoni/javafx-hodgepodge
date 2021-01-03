@@ -1,0 +1,10 @@
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+
+<TableView GridPane.rowIndex="2" GridPane.columnIndex="0">
+    <columns>
+        <TableColumn text="Column 1"></TableColumn>
+        <TableColumn text="Column 2"></TableColumn>
+    </columns>
+</TableView>
