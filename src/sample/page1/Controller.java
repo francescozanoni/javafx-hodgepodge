@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
+import sample.IbanExtractor;
 import sample.Utils;
 
 import java.net.URL;
@@ -110,7 +111,7 @@ public class Controller implements Initializable {
                 String result = Utils.getUrlContent(recordBean.getUrl());
                 recordBean.setData(String.valueOf(result.length()));
                 // Single IBAN codes are added to iban_table.
-                // @todo refactor to separate method
+                // TODO refactor to separate method
                 String[] ibans = IbanExtractor.run(result);
                 for (String iban : ibans) {
                     IbanBean ibanBean = new IbanBean();
