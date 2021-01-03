@@ -2,6 +2,9 @@ GridPane {
     -fx-padding: 10;
     -fx-hgap: 10;
     -fx-vgap: 10;
+    /* These parameters are related to the root GridPane only */
+    -fx-pref-width: 800;
+    -fx-pref-height: 400;
 }
 
 FlowPane {
