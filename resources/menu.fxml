@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+
+<MenuBar xmlns:fx="http://javafx.com/fxml"
+         fx:controller="sample.controllers.Menu"
+         fx:id="mainMenuBar">
+
+    <Menu text="Main">
+        <MenuItem text="Active" onAction="#handleMenuClicked"/>
+        <MenuItem text="Disabled programmatically" onAction="#handleMenuClicked"/>
+        <MenuItem text="Disabled by default" onAction="#handleMenuClicked" disable="true"/>
+        <SeparatorMenuItem/>
+        <MenuItem text="Exit" onAction="#handleMenuClicked"/>
+    </Menu>
+
+    <Menu text="About"/>
+
+</MenuBar>

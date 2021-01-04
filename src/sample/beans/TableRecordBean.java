@@ -1,4 +1,4 @@
-package sample.page1;
+package sample.beans;
 
 import javafx.beans.property.SimpleStringProperty;
 

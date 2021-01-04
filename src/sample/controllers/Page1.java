@@ -1,4 +1,4 @@
-package sample.page1;
+package sample.controllers;
 
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
@@ -8,6 +8,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import sample.IbanExtractor;
 import sample.Utils;
+import sample.beans.IbanBean;
+import sample.beans.TableRecordBean;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -22,7 +24,7 @@ import java.util.concurrent.Executors;
 // the asynchronous execution makes both statements executed immediately,
 // independently from code run by ExecutorService.
 
-public class Controller implements Initializable {
+public class Page1 implements Initializable {
 
     @FXML
     TableView<TableRecordBean> url_table;
@@ -116,6 +118,7 @@ public class Controller implements Initializable {
                 for (String iban : ibans) {
                     IbanBean ibanBean = new IbanBean();
                     ibanBean.setCode(iban);
+                    // TODO remove duplicate IBAN codes
                     iban_table.getItems().add(ibanBean);
                 }
             });
