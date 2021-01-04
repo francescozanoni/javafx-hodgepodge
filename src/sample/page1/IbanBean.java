@@ -31,4 +31,12 @@ public class IbanBean {
         return code;
     }
 
+    public final boolean equals(String aString) {
+        return aString.equals(code.get());
+    }
+
+    public final boolean equals(IbanBean anIbanBean) {
+        return anIbanBean.getCode().equals(getCode());
+    }
+
 }
