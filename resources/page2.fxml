@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Extracted from https://github.com/lankydan/JavaFX-Table-Tutorial -->
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.GridPane?>
+
+<VBox styleClass="root"
+      stylesheets="@style.css"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="sample.controllers.Page2">
+
+    <fx:include source="menu.fxml"/>
+
+    <GridPane>
+        <TableView fx:id="table" GridPane.rowIndex="0" GridPane.columnIndex="0">
+            <columns>
+                <TableColumn fx:id="firstNameColumn" text="First Name">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="firstName"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="lastNameColumn" text="Last Name">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="lastName"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="dateOfBirthColumn" text="Date of Birth">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="dateOfBirth"/>
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="salaryColumn" text="Salary">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="salary"/>
+                    </cellValueFactory>
+                </TableColumn>
+            </columns>
+        </TableView>
+    </GridPane>
+
+</VBox>
+

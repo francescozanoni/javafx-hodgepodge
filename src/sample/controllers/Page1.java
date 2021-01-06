@@ -9,7 +9,7 @@ import javafx.scene.control.TableView;
 import sample.IbanExtractor;
 import sample.Utils;
 import sample.beans.IbanBean;
-import sample.beans.TableRecordBean;
+import sample.beans.IbanSourceBean;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -27,7 +27,7 @@ import java.util.concurrent.Executors;
 public class Page1 implements Initializable {
 
     @FXML
-    TableView<TableRecordBean> url_table;
+    TableView<IbanSourceBean> url_table;
 
     @FXML
     TableView<IbanBean> iban_table;
@@ -46,10 +46,10 @@ public class Page1 implements Initializable {
         // URLs are loaded to table, via data model binding.
 
         Properties config = Utils.getConfig("config.properties");
-        ObservableList<TableRecordBean> recordItemCollection = url_table.getItems();
+        ObservableList<IbanSourceBean> recordItemCollection = url_table.getItems();
 
         for (Object url : config.values()) {
-            TableRecordBean recordBean = new TableRecordBean();
+            IbanSourceBean recordBean = new IbanSourceBean();
             recordBean.setUrl(String.valueOf(url));
             recordBean.setData("");
             recordItemCollection.add(recordBean);
@@ -68,7 +68,7 @@ public class Page1 implements Initializable {
      */
     public void handleButton1Action() {
 
-        for (TableRecordBean recordBean : url_table.getItems()) {
+        for (IbanSourceBean recordBean : url_table.getItems()) {
             Task<Integer> task = new Task<>() {
                 @Override
                 protected Integer call() {
@@ -98,7 +98,7 @@ public class Page1 implements Initializable {
 
         iban_table.setVisible(true);
 
-        for (TableRecordBean recordBean : url_table.getItems()) {
+        for (IbanSourceBean recordBean : url_table.getItems()) {
 
             // This is required, in order to avoid "java.lang.RuntimeException: A bound value cannot be set.",
             // occurring after handleButton1Action() execution.
@@ -139,7 +139,7 @@ public class Page1 implements Initializable {
 
         ArrayList<Callable<Integer>> taskList = new ArrayList<>();
 
-        for (TableRecordBean record : url_table.getItems()) {
+        for (IbanSourceBean record : url_table.getItems()) {
             Task<Integer> task = new Task<>() {
                 @Override
                 protected Integer call() {

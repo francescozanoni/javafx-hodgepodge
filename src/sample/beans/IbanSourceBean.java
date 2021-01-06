@@ -11,7 +11,7 @@ import javafx.beans.property.SimpleStringProperty;
  *
  * @see <a href="https://docs.oracle.com/javafx/2/binding/jfxpub-binding.htm"></a>
  */
-public class TableRecordBean {
+public class IbanSourceBean {
 
     // Define variables to store the property
     private final SimpleStringProperty url = new SimpleStringProperty();
