@@ -2,6 +2,7 @@ package sample.controllers;
 
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -66,7 +67,7 @@ public class Page1 implements Initializable {
      *
      * @see <a href="https://deitel.com/java-9-for-programmers/"></a>
      */
-    public void handleButton1Action() {
+    public void handleButton1Action(ActionEvent event) {
 
         for (IbanSourceBean recordBean : url_table.getItems()) {
             Task<Integer> task = new Task<>() {

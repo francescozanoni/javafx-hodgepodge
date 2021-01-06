@@ -11,8 +11,6 @@ import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -38,34 +36,23 @@ public class Menu implements Initializable {
         }
 
         if (clickedMenu.getText().equals("Page 1")) {
-            changeScene(getClass().getResource("../../page1.fxml"));
+            changePage(getClass().getResource("../../page1.fxml"));
         }
 
         if (clickedMenu.getText().equals("Page 2")) {
-            changeScene(getClass().getResource("../../page2.fxml"));
+            changePage(getClass().getResource("../../page2.fxml"));
         }
 
     }
 
-    private void changeScene(URL fxmlUrl) throws IOException {
+    private void changePage(URL fxmlUrl) throws IOException {
         // https://stackoverflow.com/questions/13246211/javafx-how-to-get-stage-from-controller-during-initialization
         Stage stage = (Stage) mainMenuBar.getScene().getWindow();
 
         FXMLLoader loader = new FXMLLoader();
 
-        loader.setControllerFactory(clazz -> {
-            // https://www.logicbig.com/how-to/code-snippets/jcode-reflection-class-getconstructor.html
-            try {
-                Constructor<?> c = clazz.getConstructor();
-                return c.newInstance();
-            } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
-                // TODO remove this null
-                return null;
-            }
-        });
         // https://stackoverflow.com/questions/28387218/why-does-my-javafx-stage-not-want-to-load
         // http://java-no-makanaikata.blogspot.com/2012/11/javafx-fxml-root-value-already-specified.html
-        // https://stackoverflow.com/questions/8275499/how-to-call-getclass-from-a-static-method-in-java
         loader.setLocation(fxmlUrl);
         Scene scene = new Scene(loader.load());
 
