@@ -22,7 +22,7 @@ public class Menu implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        mainMenuBar.getMenus().get(0).getItems().get(2).setDisable(true);
+        mainMenuBar.getMenus().get(0).getItems().get(3).setDisable(true);
     }
 
     @FXML
@@ -41,6 +41,10 @@ public class Menu implements Initializable {
 
         if (clickedMenu.getText().equals("Page 2")) {
             changePage(getClass().getResource("../../page2.fxml"));
+        }
+
+        if (clickedMenu.getText().equals("Page 3")) {
+            changePage(getClass().getResource("../../page3.fxml"));
         }
 
     }

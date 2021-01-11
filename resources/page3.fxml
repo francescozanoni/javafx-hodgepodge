@@ -1,0 +1,24 @@
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:controller="sample.controllers.Page3"
+      xmlns:fx="http://javafx.com/fxml"
+      stylesheets="@style.css"
+      styleClass="root">
+    <!-- The "@" symbol means the style sheet is in the same directory as the FXML file -->
+    <!-- @see https://www.callicoder.com/javafx-css-tutorial -->
+
+    <fx:include source="menu.fxml"/>
+
+    <!-- https://stackoverflow.com/questions/39164050/javafx-8-tabpanes-and-tabs-with-separate-fxml-and-controllers-for-each-tab -->
+    <TabPane>
+        <Tab text="FooTab" closable="false">
+            <fx:include source="tab1.fxml"/>
+        </Tab>
+        <Tab text="BarTab" closable="false">
+            <fx:include source="tab2.fxml"/>
+        </Tab>
+    </TabPane>
+
+</VBox>

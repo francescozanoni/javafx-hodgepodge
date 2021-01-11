@@ -9,7 +9,8 @@
 
 <VBox fx:controller="sample.controllers.Page1"
       xmlns:fx="http://javafx.com/fxml"
-      stylesheets="@style.css">
+      stylesheets="@style.css"
+      styleClass="root">
     <!-- The "@" symbol means the style sheet is in the same directory as the FXML file -->
     <!-- @see https://www.callicoder.com/javafx-css-tutorial -->
 

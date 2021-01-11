@@ -14,3 +14,21 @@ FlowPane {
 TableView {
     -fx-pref-width: 800;
 }
+
+.tabContent {
+    -fx-padding: 10;
+    -fx-spacing: 10;
+    -fx-pref-width: 800;
+}
+
+TextArea {
+    -fx-font-family: monospaced;
+    -fx-pref-height: 300;
+    -fx-text-fill: white;
+}
+
+/* Text area background color */
+/* https://stackoverflow.com/questions/21493634/javafx-css-styling-of-textarea-does-not-work */
+TextArea .content {
+    -fx-background-color: black;
+}

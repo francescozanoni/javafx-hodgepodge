@@ -8,10 +8,12 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.GridPane?>
 
-<VBox styleClass="root"
+<VBox fx:controller="sample.controllers.Page2"
+      xmlns:fx="http://javafx.com/fxml"
       stylesheets="@style.css"
-      xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="sample.controllers.Page2">
+      styleClass="root">
+    <!-- The "@" symbol means the style sheet is in the same directory as the FXML file -->
+    <!-- @see https://www.callicoder.com/javafx-css-tutorial -->
 
     <fx:include source="menu.fxml"/>
 
