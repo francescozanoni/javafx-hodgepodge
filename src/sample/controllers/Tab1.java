@@ -40,11 +40,7 @@ public class Tab1 implements Initializable {
 
     public void initialize(URL url, ResourceBundle resources) {
         try {
-            String command = "sh -c ls";
-            if (System.getProperty("os.name").toLowerCase().startsWith("windows")) {
-                command = "cmd.exe /c dir";
-            }
-            Process process = Runtime.getRuntime().exec(command);
+            Process process = Runtime.getRuntime().exec(getListDirectoryShellCommand());
             StreamGobbler streamGobbler = new StreamGobbler(process.getInputStream(), textArea::appendText);
             ExecutorService executor = Executors.newSingleThreadExecutor();
             executor.submit(streamGobbler);
@@ -52,5 +48,13 @@ public class Tab1 implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private String getListDirectoryShellCommand() {
+        String command = "sh -c ls";
+        if (System.getProperty("os.name").toLowerCase().startsWith("windows")) {
+            command = "cmd.exe /c dir";
+        }
+        return command;
     }
 }

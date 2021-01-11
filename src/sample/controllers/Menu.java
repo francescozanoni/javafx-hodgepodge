@@ -22,7 +22,16 @@ public class Menu implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        mainMenuBar.getMenus().get(0).getItems().get(3).setDisable(true);
+        // Menu item with text "Disable programmatically" is disabled.
+        mainMenuBar
+                .getMenus()
+                .get(0)
+                .getItems()
+                // Menu.getItems() returns non MenuItems, as well,
+                // therefore text availability must be checked.
+                .filtered(item -> item.getText() != null && item.getText().equals("Disabled programmatically"))
+                .get(0)
+                .setDisable(true);
     }
 
     @FXML
@@ -35,16 +44,20 @@ public class Menu implements Initializable {
             Platform.exit();
         }
 
-        if (clickedMenu.getText().equals("Page 1")) {
-            changePage(getClass().getResource("../../page1.fxml"));
-        }
-
-        if (clickedMenu.getText().equals("Page 2")) {
-            changePage(getClass().getResource("../../page2.fxml"));
-        }
-
-        if (clickedMenu.getText().equals("Page 3")) {
-            changePage(getClass().getResource("../../page3.fxml"));
+        switch (clickedMenu.getText()) {
+            case "Page 1":
+                changePage(getClass().getResource("../../page1.fxml"));
+                break;
+            case "Page 2":
+                changePage(getClass().getResource("../../page2.fxml"));
+                break;
+            case "Page 3":
+                changePage(getClass().getResource("../../page3.fxml"));
+                break;
+            case "Page 4":
+                changePage(getClass().getResource("../../page4.fxml"));
+                break;
+            default:
         }
 
     }

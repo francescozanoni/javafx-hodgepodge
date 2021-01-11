@@ -10,6 +10,7 @@
         <MenuItem text="Page 1" onAction="#handleMenuClicked"/>
         <MenuItem text="Page 2" onAction="#handleMenuClicked"/>
         <MenuItem text="Page 3" onAction="#handleMenuClicked"/>
+        <MenuItem text="Page 4" onAction="#handleMenuClicked"/>
         <MenuItem text="Disabled programmatically" onAction="#handleMenuClicked"/>
         <MenuItem text="Disabled by default" onAction="#handleMenuClicked" disable="true"/>
         <SeparatorMenuItem/>

@@ -1,0 +1,30 @@
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+
+<VBox fx:controller="sample.controllers.Page4"
+      xmlns:fx="http://javafx.com/fxml"
+      stylesheets="@style.css"
+      styleClass="root">
+    <!-- The "@" symbol means the style sheet is in the same directory as the FXML file -->
+    <!-- @see https://www.callicoder.com/javafx-css-tutorial -->
+
+    <fx:include source="menu.fxml"/>
+
+    <TableView fx:id="table">
+        <columns>
+            <TableColumn fx:id="c1">
+            </TableColumn>
+            <TableColumn fx:id="c2">
+            </TableColumn>
+            <TableColumn fx:id="c3">
+            </TableColumn>
+            <TableColumn fx:id="c4">
+            </TableColumn>
+        </columns>
+    </TableView>
+
+</VBox>
