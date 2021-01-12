@@ -1,5 +1,3 @@
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.Tab?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TableColumn?>
@@ -16,13 +14,50 @@
 
     <TableView fx:id="table">
         <columns>
-            <TableColumn fx:id="c1">
+            <TableColumn>
+                <cellValueFactory>
+                    <PropertyValueFactory property="col0"/>
+                </cellValueFactory>
             </TableColumn>
-            <TableColumn fx:id="c2">
+            <TableColumn>
+                <cellValueFactory>
+                    <PropertyValueFactory property="col1"/>
+                </cellValueFactory>
             </TableColumn>
-            <TableColumn fx:id="c3">
+            <TableColumn>
+                <cellValueFactory>
+                    <PropertyValueFactory property="col2"/>
+                </cellValueFactory>
             </TableColumn>
-            <TableColumn fx:id="c4">
+            <TableColumn>
+                <cellValueFactory>
+                    <PropertyValueFactory property="col3"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn>
+                <cellValueFactory>
+                    <PropertyValueFactory property="col4"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn>
+                <cellValueFactory>
+                    <PropertyValueFactory property="col5"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn>
+                <cellValueFactory>
+                    <PropertyValueFactory property="col6"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn>
+                <cellValueFactory>
+                    <PropertyValueFactory property="col7"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn>
+                <cellValueFactory>
+                    <PropertyValueFactory property="col8"/>
+                </cellValueFactory>
             </TableColumn>
         </columns>
     </TableView>
