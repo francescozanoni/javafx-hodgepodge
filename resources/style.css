@@ -32,3 +32,11 @@ TextArea {
 TextArea .content {
     -fx-background-color: black;
 }
+
+/* Hide table header */
+/* https://stackoverflow.com/questions/27118872/how-to-hide-tableview-column-header-in-javafx-8 */
+.column-header-background {
+    -fx-max-height: 0;
+    -fx-pref-height: 0;
+    -fx-min-height: 0;
+}
