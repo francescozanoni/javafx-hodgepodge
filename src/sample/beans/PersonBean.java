@@ -1,6 +1,6 @@
 // Extracted from https://github.com/lankydan/JavaFX-Table-Tutorial
 
-package sample;
+package sample.beans;
 
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -8,19 +8,12 @@ import javafx.beans.property.SimpleStringProperty;
 
 import java.util.Date;
 
-public class PersonTableData {
+public class PersonBean {
 
-    private final SimpleStringProperty firstName;
-    private final SimpleStringProperty lastName;
-    private final SimpleObjectProperty<Date> dateOfBirth;
-    private final SimpleDoubleProperty salary;
-
-    public PersonTableData(Person person) {
-        this.firstName = new SimpleStringProperty(person.firstName);
-        this.lastName = new SimpleStringProperty(person.lastName);
-        this.dateOfBirth = new SimpleObjectProperty<>(person.dateOfBirth);
-        this.salary = new SimpleDoubleProperty(person.salary);
-    }
+    private final SimpleStringProperty firstName = new SimpleStringProperty();
+    private final SimpleStringProperty lastName = new SimpleStringProperty();
+    private final SimpleObjectProperty<Date> dateOfBirth = new SimpleObjectProperty<>();
+    private final SimpleDoubleProperty salary = new SimpleDoubleProperty();
 
     public String getFirstName() {
         return firstName.get();

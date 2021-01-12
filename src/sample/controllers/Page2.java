@@ -13,7 +13,7 @@ import javafx.util.converter.DateStringConverter;
 import javafx.util.converter.DefaultStringConverter;
 import javafx.util.converter.DoubleStringConverter;
 import sample.Person;
-import sample.PersonTableData;
+import sample.beans.PersonBean;
 
 import java.net.URL;
 import java.text.ParseException;
@@ -26,22 +26,22 @@ import java.util.ResourceBundle;
 public class Page2 implements Initializable {
 
     @FXML
-    private TableView<PersonTableData> table;
+    private TableView<PersonBean> table;
 
-    private final ObservableList<PersonTableData> observableData = FXCollections.observableArrayList();
+    private final ObservableList<PersonBean> observableData = FXCollections.observableArrayList();
 
     private static final String DATE_PATTERN = "dd/MM/yyyy";
 
     private static final SimpleDateFormat dateFormatter = new SimpleDateFormat(DATE_PATTERN);
 
     @FXML
-    private TableColumn<PersonTableData, String> firstNameColumn, lastNameColumn;
+    private TableColumn<PersonBean, String> firstNameColumn, lastNameColumn;
 
     @FXML
-    private TableColumn<PersonTableData, Date> dateOfBirthColumn;
+    private TableColumn<PersonBean, Date> dateOfBirthColumn;
 
     @FXML
-    private TableColumn<PersonTableData, Double> salaryColumn;
+    private TableColumn<PersonBean, Double> salaryColumn;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -58,7 +58,14 @@ public class Page2 implements Initializable {
                     new Person("Michael", "Collins", dateFormatter.parse("01/01/0001"), 299),
                     new Person("Stuart", "Kerrigan", dateFormatter.parse("06/10/1894"), 100000)
             );
-            data.forEach(p -> observableData.add(new PersonTableData(p)));
+            data.forEach(person -> {
+                PersonBean personBean = new PersonBean();
+                personBean.setFirstName(person.firstName);
+                personBean.setLastName(person.lastName);
+                personBean.setDateOfBirth(person.dateOfBirth);
+                personBean.setSalary(person.salary);
+                observableData.add(personBean);
+            });
         } catch (ParseException e) {
             e.printStackTrace();
         }
