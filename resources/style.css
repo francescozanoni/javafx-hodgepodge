@@ -11,32 +11,41 @@ FlowPane {
     -fx-hgap: 10;
 }
 
-TableView {
-    -fx-pref-width: 800;
-}
-
 .tabContent {
     -fx-padding: 10;
     -fx-spacing: 10;
     -fx-pref-width: 800;
 }
 
+/* ************************************************************************************* */
+
 TextArea {
     -fx-font-family: monospaced;
+}
+
+.shellTextArea {
     -fx-pref-height: 300;
     -fx-text-fill: white;
 }
 
 /* Text area background color */
 /* https://stackoverflow.com/questions/21493634/javafx-css-styling-of-textarea-does-not-work */
-TextArea .content {
+.shellTextArea .content {
     -fx-background-color: black;
+}
+
+/* ************************************************************************************* */
+
+TableView {
+    -fx-pref-width: 800;
 }
 
 /* Hide table header */
 /* https://stackoverflow.com/questions/27118872/how-to-hide-tableview-column-header-in-javafx-8 */
+/*
 .column-header-background {
     -fx-max-height: 0;
     -fx-pref-height: 0;
     -fx-min-height: 0;
 }
+*/

@@ -1,7 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.cell.PropertyValueFactory?>
 
 <VBox fx:controller="sample.controllers.Page4"
       xmlns:fx="http://javafx.com/fxml"
@@ -12,54 +13,13 @@
 
     <fx:include source="menu.fxml"/>
 
-    <TableView fx:id="table">
-        <columns>
-            <TableColumn>
-                <cellValueFactory>
-                    <PropertyValueFactory property="col0"/>
-                </cellValueFactory>
-            </TableColumn>
-            <TableColumn>
-                <cellValueFactory>
-                    <PropertyValueFactory property="col1"/>
-                </cellValueFactory>
-            </TableColumn>
-            <TableColumn>
-                <cellValueFactory>
-                    <PropertyValueFactory property="col2"/>
-                </cellValueFactory>
-            </TableColumn>
-            <TableColumn>
-                <cellValueFactory>
-                    <PropertyValueFactory property="col3"/>
-                </cellValueFactory>
-            </TableColumn>
-            <TableColumn>
-                <cellValueFactory>
-                    <PropertyValueFactory property="col4"/>
-                </cellValueFactory>
-            </TableColumn>
-            <TableColumn>
-                <cellValueFactory>
-                    <PropertyValueFactory property="col5"/>
-                </cellValueFactory>
-            </TableColumn>
-            <TableColumn>
-                <cellValueFactory>
-                    <PropertyValueFactory property="col6"/>
-                </cellValueFactory>
-            </TableColumn>
-            <TableColumn>
-                <cellValueFactory>
-                    <PropertyValueFactory property="col7"/>
-                </cellValueFactory>
-            </TableColumn>
-            <TableColumn>
-                <cellValueFactory>
-                    <PropertyValueFactory property="col8"/>
-                </cellValueFactory>
-            </TableColumn>
-        </columns>
-    </TableView>
+    <GridPane>
+
+        <TextArea fx:id="textArea"
+                  editable="false"
+                  GridPane.rowIndex="0"
+                  GridPane.columnIndex="0"/>
+
+    </GridPane>
 
 </VBox>

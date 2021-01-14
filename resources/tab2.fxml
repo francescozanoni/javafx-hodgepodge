@@ -4,7 +4,10 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Button?>
 
-<VBox xmlns:fx="http://www.w3.org/2001/XInclude">
+<VBox xmlns:fx="http://www.w3.org/2001/XInclude"
+      styleClass="tabContent">
+
     <Label fx:id="lblText" text="Hi"/>
     <Button fx:id="btnFooTab" text="Change text"/>
+
 </VBox>
