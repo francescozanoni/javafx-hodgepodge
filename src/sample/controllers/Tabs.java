@@ -1,4 +1,4 @@
 package sample.controllers;
 
-public class Page3 {
+public class Tabs {
 }

@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:controller="sample.controllers.Page1"
+<VBox fx:controller="sample.controllers.IbanCrawler"
       xmlns:fx="http://javafx.com/fxml"
       stylesheets="@style.css"
       styleClass="root">

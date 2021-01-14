@@ -24,7 +24,7 @@ import java.util.concurrent.Executors;
 // the asynchronous execution makes both statements executed immediately,
 // independently from code run by ExecutorService.
 
-public class Page1 implements Initializable {
+public class IbanCrawler implements Initializable {
 
     @FXML
     TableView<IbanSourceBean> url_table;

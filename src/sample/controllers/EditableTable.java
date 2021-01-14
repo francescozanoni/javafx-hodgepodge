@@ -23,7 +23,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class Page2 implements Initializable {
+public class EditableTable implements Initializable {
 
     @FXML
     private TableView<PersonBean> table;

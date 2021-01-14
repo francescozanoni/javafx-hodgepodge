@@ -45,17 +45,17 @@ public class Menu implements Initializable {
         }
 
         switch (clickedMenu.getText()) {
-            case "Page 1":
-                changePage(getClass().getResource("../../page1.fxml"));
+            case "IBAN crawler":
+                changePage(getClass().getResource("../../iban_crawler.fxml"));
                 break;
-            case "Page 2":
-                changePage(getClass().getResource("../../page2.fxml"));
+            case "Editable table":
+                changePage(getClass().getResource("../../editable_table.fxml"));
                 break;
-            case "Page 3":
-                changePage(getClass().getResource("../../page3.fxml"));
+            case "Tabs":
+                changePage(getClass().getResource("../../tabs.fxml"));
                 break;
-            case "Page 4":
-                changePage(getClass().getResource("../../page4.fxml"));
+            case "Sudoku":
+                changePage(getClass().getResource("../../sudoku.fxml"));
                 break;
             default:
         }

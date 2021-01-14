@@ -4,7 +4,7 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:controller="sample.controllers.Page3"
+<VBox fx:controller="sample.controllers.Tabs"
       xmlns:fx="http://javafx.com/fxml"
       stylesheets="@style.css"
       styleClass="root">

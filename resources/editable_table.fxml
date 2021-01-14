@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.GridPane?>
 
-<VBox fx:controller="sample.controllers.Page2"
+<VBox fx:controller="sample.controllers.EditableTable"
       xmlns:fx="http://javafx.com/fxml"
       stylesheets="@style.css"
       styleClass="root">

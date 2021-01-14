@@ -7,7 +7,7 @@ import javafx.scene.control.TextArea;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class Page4 implements Initializable {
+public class Sudoku implements Initializable {
 
     @FXML
     TextArea textArea;
