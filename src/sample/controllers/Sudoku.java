@@ -5,6 +5,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TextArea;
 
 import java.net.URL;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -24,11 +25,28 @@ public class Sudoku implements Initializable {
 
     }
 
+    private boolean isValueInRow(int value, int rowNumber, Integer[][] matrix) {
+        return Arrays.stream(matrix[rowNumber]).anyMatch(n -> n == value);
+    }
+
+    private boolean isValueInColumn(int value, int columnNumber, Integer[][] matrix) {
+        for (Integer[] row : matrix) {
+            if (row[columnNumber] == value) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isValueInSquare(int value, int rowNumber, int columnNumber, Integer[][] matrix) {
+        return true;
+    }
+
     private Integer[][] getIntegerMatrix() {
 
-        List<Integer> list = new java.util.ArrayList<>(List.of(1, 2, 3, 4, 5, 6, 7, 8, 9));
-
         Integer[][] matrix = new Integer[9][9];
+
+        List<Integer> list = new java.util.ArrayList<>(List.of(1, 2, 3, 4, 5, 6, 7, 8, 9));
 
         for (int i = 0; i < matrix.length; i++) {
             // Randomize list
