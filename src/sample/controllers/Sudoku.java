@@ -6,6 +6,7 @@ import javafx.scene.control.TextArea;
 
 import java.net.URL;
 import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -39,7 +40,25 @@ public class Sudoku implements Initializable {
     }
 
     private boolean isValueInSquare(int value, int rowNumber, int columnNumber, Integer[][] matrix) {
-        return true;
+        int[] squareValues = getSquareValues(rowNumber, columnNumber, matrix);
+        return Arrays.stream(squareValues).anyMatch(n -> n == value);
+    }
+    
+    private int[] getSquareValues(int rowNumber, int columnNumber, Integer[][] matrix) {
+        int squareRowNumber = rowNumber / 3;
+        int squareColumnNumber = columnNumber / 3;
+        int[] squareFirstCell = {squareRowNumber * 3, squareColumnNumber * 3};
+        int[] squareLastCell = {squareRowNumber * 3 + 3, squareColumnNumber * 3 + 3};
+        List<Integer> list = new ArrayList<>();
+        for (int i = squareFirstCell[0]; i < squareLastCell[0]; i++) {
+            for (int j = squareFirstCell[1]; j < squareLastCell[1]; j++) {
+                list.add(matrix[i][j]);
+            }
+        }
+        // https://www.techiedelight.com/convert-list-integer-array-int
+        return list.stream()
+                            .mapToInt(Integer::intValue)
+                            .toArray();
     }
 
     private Integer[][] getIntegerMatrix() {
