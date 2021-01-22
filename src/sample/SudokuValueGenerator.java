@@ -1,15 +1,20 @@
 package sample;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class SudokuValueGenerator {
 
     private Integer[][] matrix;
-    private int NUMBER_OF_ROWS = 4;
-    private int NUMBER_OF_SECTIONS_ON_LINE = 2;
+    private int NUMBER_OF_ROWS = 9;
+    private int NUMBER_OF_SECTIONS_ON_LINE = 3;
+
+    public static void main (String[] args) {
+        System.out.println(new SudokuValueGenerator().generateAsString());
+    }
 
     public String generateAsString() {
-        generateIntegerMatrix();
+        generateMatrix();
         return getIntegerMatrixAsString();
     }
 
@@ -27,11 +32,27 @@ public class SudokuValueGenerator {
     }
 
     private boolean isValueInSquare(int value, int rowNumber, int columnNumber) {
-        int[] squareValues = getSquareValues(rowNumber, columnNumber);
-        return Arrays.stream(squareValues).anyMatch(n -> n == value);
+        List<Integer> squareValues = getSquareValues(rowNumber, columnNumber);
+        return squareValues.stream().anyMatch(n -> n == value);
     }
 
-    private int[] getSquareValues(int rowNumber, int columnNumber) {
+    private List<Integer> getRowValues(int rowNumber) {
+        return Arrays.stream(matrix[rowNumber])
+                .filter(n -> n != 0)
+                .collect(Collectors.toList());
+    }
+
+    private List<Integer> getColumnValues(int columnNumber) {
+        List<Integer> list = new ArrayList<>();
+        for (Integer[] row : matrix) {
+            list.add(row[columnNumber]);
+        }
+        return list.stream()
+                .filter(n -> n != 0)
+                .collect(Collectors.toList());
+    }
+
+    private List<Integer> getSquareValues(int rowNumber, int columnNumber) {
         int squareRowNumber = rowNumber / NUMBER_OF_SECTIONS_ON_LINE;
         int squareColumnNumber = columnNumber / NUMBER_OF_SECTIONS_ON_LINE;
         int[] squareFirstCell = {squareRowNumber * NUMBER_OF_SECTIONS_ON_LINE, squareColumnNumber * 3};
@@ -42,29 +63,37 @@ public class SudokuValueGenerator {
         }
         // https://www.techiedelight.com/convert-list-integer-array-int
         return list.stream()
-                .mapToInt(Integer::intValue)
-                .toArray();
+                .filter(n -> n != 0)
+                .collect(Collectors.toList());
     }
 
-    private void generateIntegerMatrix() {
+    private void generateMatrix() {
 
         matrix = new Integer[NUMBER_OF_ROWS][NUMBER_OF_ROWS];
 
-        for (Integer[] integers : matrix) {
-            Arrays.fill(integers, 0);
+        for (Integer[] row : matrix) {
+            Arrays.fill(row, 0);
         }
 
-        SplittableRandom r = new SplittableRandom();
+        Random r = new Random();
 
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[i].length; j++) {
-                int newValue = r.nextInt(1, NUMBER_OF_ROWS + 1);
-                while (isValueInRow(newValue, i) ||
-                        isValueInColumn(newValue, j) ||
-                        isValueInSquare(newValue, i, j)) {
-                    newValue = r.nextInt(1, NUMBER_OF_ROWS + 1);
-                }
-                matrix[i][j] = newValue;
+        for (int rowNumber = 0; rowNumber < matrix.length; rowNumber++) {
+            for (int columnNumber = 0; columnNumber < matrix[rowNumber].length; columnNumber++) {
+
+                Integer[] allAllowedValues = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+
+                // https://howtodoinjava.com/java/array/intersection-between-arrays/
+
+                HashSet<Integer> set = new HashSet<>(Arrays.asList(allAllowedValues));
+
+                set.removeAll(getRowValues(rowNumber));
+                set.removeAll(getColumnValues(columnNumber));
+                set.removeAll(getSquareValues(rowNumber, columnNumber));
+
+                int[] allowedValues = set.stream().mapToInt(Integer::intValue).toArray();
+
+                matrix[rowNumber][columnNumber] = allowedValues[r.nextInt(allowedValues.length)];
+
             }
         }
     }
@@ -73,10 +102,10 @@ public class SudokuValueGenerator {
 
         StringBuilder incrementalString = new StringBuilder();
 
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[i].length; j++) {
-                incrementalString.append(matrix[i][j]).append(" ");
-                if (j == matrix[i].length - 1 && i < matrix.length - 1) {
+        for (int rowNumber = 0; rowNumber < matrix.length; rowNumber++) {
+            for (int columnNumber = 0; columnNumber < matrix[rowNumber].length; columnNumber++) {
+                incrementalString.append(matrix[rowNumber][columnNumber]).append(" ");
+                if (columnNumber == matrix[rowNumber].length - 1 && rowNumber < matrix.length - 1) {
                     incrementalString.append("\n");
                 }
             }
