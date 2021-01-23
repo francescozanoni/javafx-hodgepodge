@@ -16,10 +16,27 @@ public class Sudoku implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        String matrixAsString = new SudokuValueGenerator().generateAsString();
+        Integer[][] values = new SudokuValueGenerator().generate();
+        String valuesAsString = renderIntegerMatrixAsString(values);
 
-        textArea.setText(matrixAsString);
+        textArea.setText(valuesAsString);
 
+    }
+
+    private String renderIntegerMatrixAsString(Integer[][] matrix) {
+
+        StringBuilder incrementalString = new StringBuilder();
+
+        for (int rowIndex = 0; rowIndex < matrix.length; rowIndex++) {
+            for (int columnIndex = 0; columnIndex < matrix[rowIndex].length; columnIndex++) {
+                incrementalString.append(matrix[rowIndex][columnIndex]).append(" ");
+                if (columnIndex == matrix[rowIndex].length - 1 && rowIndex < matrix.length - 1) {
+                    incrementalString.append("\n");
+                }
+            }
+        }
+
+        return incrementalString.toString();
     }
 
 }

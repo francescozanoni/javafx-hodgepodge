@@ -8,74 +8,54 @@ public class SudokuValueGenerator {
 
     private Integer[][] matrix;
     private int NUMBER_OF_ROWS = 9;
-    private int NUMBER_OF_SECTIONS_ON_LINE = 3;
+    private int NUMBER_OF_SECTIONS_PER_LINE = 3;
 
-    public static void main (String[] args) {
-        System.out.println(new SudokuValueGenerator().generateAsString());
-    }
-
-    public String generateAsString() {
-        generateMatrix();
-        return getIntegerMatrixAsString();
-    }
-
-    private boolean isValueInRow(int value, int rowNumber) {
-        return Arrays.stream(matrix[rowNumber]).anyMatch(n -> n == value);
-    }
-
-    private boolean isValueInColumn(int value, int columnNumber) {
-        for (Integer[] row : matrix) {
-            if (row[columnNumber] == value) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean isValueInSection(int value, int rowNumber, int columnNumber) {
-        return getSectionValues(rowNumber, columnNumber)
-            .stream()
-            .anyMatch(n -> n == value);
-    }
-
-    private List<Integer> getRowValues(int rowNumber) {
-        return Arrays.stream(matrix[rowNumber])
+    private List<Integer> getRowValues(int rowIndex) {
+        return Arrays.stream(matrix[rowIndex])
                 .filter(n -> n != 0)
                 .collect(Collectors.toList());
     }
 
-    private List<Integer> getColumnValues(int columnNumber) {
+    private List<Integer> getColumnValues(int columnIndex) {
         List<Integer> list = new ArrayList<>();
         for (Integer[] row : matrix) {
-            list.add(row[columnNumber]);
+            list.add(row[columnIndex]);
         }
         return list.stream()
                 .filter(n -> n != 0)
                 .collect(Collectors.toList());
     }
 
-    private List<Integer> getSectionValues(int rowNumber, int columnNumber) {
-        int sectionRowNumber = rowNumber / NUMBER_OF_SECTIONS_ON_LINE;
-        int sectionColumnNumber = columnNumber / NUMBER_OF_SECTIONS_ON_LINE;
+    private List<Integer> getSectionValues(int rowIndex, int columnIndex) {
+
+        // Index of section vertical position.
+        int sectionRowIndex = rowIndex / NUMBER_OF_SECTIONS_PER_LINE;
+
+        // Index of section horizontal position.
+        int sectionColumnIndex = columnIndex / NUMBER_OF_SECTIONS_PER_LINE;
+
+        // Cells identified by rowIndex/columnIndex.
         int[] sectionFirstCell = {
-            sectionRowNumber * NUMBER_OF_SECTIONS_ON_LINE,
-            sectionColumnNumber * NUMBER_OF_SECTIONS_ON_LINE
+                sectionRowIndex * NUMBER_OF_SECTIONS_PER_LINE,
+                sectionColumnIndex * NUMBER_OF_SECTIONS_PER_LINE
         };
         int[] sectionLastCell = {
-            sectionRowNumber * NUMBER_OF_SECTIONS_ON_LINE + NUMBER_OF_SECTIONS_ON_LINE,
-            sectionColumnNumber * NUMBER_OF_SECTIONS_ON_LINE + NUMBER_OF_SECTIONS_ON_LINE
+                sectionRowIndex * NUMBER_OF_SECTIONS_PER_LINE + NUMBER_OF_SECTIONS_PER_LINE,
+                sectionColumnIndex * NUMBER_OF_SECTIONS_PER_LINE + NUMBER_OF_SECTIONS_PER_LINE
         };
+
         List<Integer> list = new ArrayList<>();
         for (int i = sectionFirstCell[0]; i < sectionLastCell[0]; i++) {
             list.addAll(Arrays.asList(matrix[i]).subList(sectionFirstCell[1], sectionLastCell[1]));
         }
+
         // https://www.techiedelight.com/convert-list-integer-array-int
         return list.stream()
                 .filter(n -> n != 0)
                 .collect(Collectors.toList());
     }
 
-    private void generateMatrix() {
+    public Integer[][] generate() {
 
         matrix = new Integer[NUMBER_OF_ROWS][NUMBER_OF_ROWS];
 
@@ -83,48 +63,34 @@ public class SudokuValueGenerator {
             Arrays.fill(row, 0);
         }
 
-        Random r = new Random();
+        Random randomizer = new Random();
+
         // https://www.baeldung.com/java-listing-numbers-within-a-range
         List<Integer> possibleValues = IntStream.rangeClosed(1, NUMBER_OF_ROWS).boxed().collect(Collectors.toList());
         List<Integer> allowedValues;
 
-        for (int rowNumber = 0; rowNumber < matrix.length; rowNumber++) {
-            for (int columnNumber = 0; columnNumber < matrix[rowNumber].length; columnNumber++) {
+        for (int rowIndex = 0; rowIndex < matrix.length; rowIndex++) {
+            for (int columnIndex = 0; columnIndex < matrix[rowIndex].length; columnIndex++) {
 
                 allowedValues = new ArrayList<>(possibleValues);
 
-                allowedValues.removeAll(getRowValues(rowNumber));
-                allowedValues.removeAll(getColumnValues(columnNumber));
-                allowedValues.removeAll(getSectionValues(rowNumber, columnNumber));
+                allowedValues.removeAll(getRowValues(rowIndex));
+                allowedValues.removeAll(getColumnValues(columnIndex));
+                allowedValues.removeAll(getSectionValues(rowIndex, columnIndex));
 
                 // Value generation can cause a situation with no allowed values at all.
                 // If it happens, generation is re-started.
                 if (allowedValues.size() == 0) {
-                    generateMatrix();
-                    return;
+                    return generate();
                 }
 
-                matrix[rowNumber][columnNumber] = allowedValues.get(r.nextInt(allowedValues.size()));
-                
-            }
-        }
-        
-    }
+                matrix[rowIndex][columnIndex] = allowedValues.get(randomizer.nextInt(allowedValues.size()));
 
-    private String getIntegerMatrixAsString() {
-
-        StringBuilder incrementalString = new StringBuilder();
-
-        for (int rowNumber = 0; rowNumber < matrix.length; rowNumber++) {
-            for (int columnNumber = 0; columnNumber < matrix[rowNumber].length; columnNumber++) {
-                incrementalString.append(matrix[rowNumber][columnNumber]).append(" ");
-                if (columnNumber == matrix[rowNumber].length - 1 && rowNumber < matrix.length - 1) {
-                    incrementalString.append("\n");
-                }
             }
         }
 
-        return incrementalString.toString();
+        return matrix;
+
     }
 
 }
