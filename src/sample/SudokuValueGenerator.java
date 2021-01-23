@@ -76,26 +76,34 @@ public class SudokuValueGenerator {
         }
 
         Random r = new Random();
+        Integer[] allAllowedValues = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+        HashSet<Integer> set = new HashSet<>();
 
         for (int rowNumber = 0; rowNumber < matrix.length; rowNumber++) {
             for (int columnNumber = 0; columnNumber < matrix[rowNumber].length; columnNumber++) {
 
-                Integer[] allAllowedValues = {1, 2, 3, 4, 5, 6, 7, 8, 9};
-
                 // https://howtodoinjava.com/java/array/intersection-between-arrays/
-
-                HashSet<Integer> set = new HashSet<>(Arrays.asList(allAllowedValues));
+                
+                set.addAll(Arrays.asList(allAllowedValues));
 
                 set.removeAll(getRowValues(rowNumber));
                 set.removeAll(getColumnValues(columnNumber));
                 set.removeAll(getSquareValues(rowNumber, columnNumber));
 
                 int[] allowedValues = set.stream().mapToInt(Integer::intValue).toArray();
+                
+                if (allowedValues.length == 0) {
+                    generateMatrix();
+                    return;
+                }
 
                 matrix[rowNumber][columnNumber] = allowedValues[r.nextInt(allowedValues.length)];
+                
+                set.clear();
 
             }
         }
+        
     }
 
     private String getIntegerMatrixAsString() {
