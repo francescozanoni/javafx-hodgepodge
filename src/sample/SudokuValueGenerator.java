@@ -2,6 +2,7 @@ package sample;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class SudokuValueGenerator {
 
@@ -31,9 +32,10 @@ public class SudokuValueGenerator {
         return false;
     }
 
-    private boolean isValueInSquare(int value, int rowNumber, int columnNumber) {
-        List<Integer> squareValues = getSquareValues(rowNumber, columnNumber);
-        return squareValues.stream().anyMatch(n -> n == value);
+    private boolean isValueInSection(int value, int rowNumber, int columnNumber) {
+        return getSectionValues(rowNumber, columnNumber)
+            .stream()
+            .anyMatch(n -> n == value);
     }
 
     private List<Integer> getRowValues(int rowNumber) {
@@ -52,14 +54,20 @@ public class SudokuValueGenerator {
                 .collect(Collectors.toList());
     }
 
-    private List<Integer> getSquareValues(int rowNumber, int columnNumber) {
-        int squareRowNumber = rowNumber / NUMBER_OF_SECTIONS_ON_LINE;
-        int squareColumnNumber = columnNumber / NUMBER_OF_SECTIONS_ON_LINE;
-        int[] squareFirstCell = {squareRowNumber * NUMBER_OF_SECTIONS_ON_LINE, squareColumnNumber * 3};
-        int[] squareLastCell = {squareRowNumber * NUMBER_OF_SECTIONS_ON_LINE + NUMBER_OF_SECTIONS_ON_LINE, squareColumnNumber * NUMBER_OF_SECTIONS_ON_LINE + NUMBER_OF_SECTIONS_ON_LINE};
+    private List<Integer> getSectionValues(int rowNumber, int columnNumber) {
+        int sectionRowNumber = rowNumber / NUMBER_OF_SECTIONS_ON_LINE;
+        int sectionColumnNumber = columnNumber / NUMBER_OF_SECTIONS_ON_LINE;
+        int[] sectionFirstCell = {
+            sectionRowNumber * NUMBER_OF_SECTIONS_ON_LINE,
+            sectionColumnNumber * NUMBER_OF_SECTIONS_ON_LINE
+        };
+        int[] sectionLastCell = {
+            sectionRowNumber * NUMBER_OF_SECTIONS_ON_LINE + NUMBER_OF_SECTIONS_ON_LINE,
+            sectionColumnNumber * NUMBER_OF_SECTIONS_ON_LINE + NUMBER_OF_SECTIONS_ON_LINE
+        };
         List<Integer> list = new ArrayList<>();
-        for (int i = squareFirstCell[0]; i < squareLastCell[0]; i++) {
-            list.addAll(Arrays.asList(matrix[i]).subList(squareFirstCell[1], squareLastCell[1]));
+        for (int i = sectionFirstCell[0]; i < sectionLastCell[0]; i++) {
+            list.addAll(Arrays.asList(matrix[i]).subList(sectionFirstCell[1], sectionLastCell[1]));
         }
         // https://www.techiedelight.com/convert-list-integer-array-int
         return list.stream()
@@ -76,31 +84,28 @@ public class SudokuValueGenerator {
         }
 
         Random r = new Random();
-        Integer[] allAllowedValues = {1, 2, 3, 4, 5, 6, 7, 8, 9};
-        HashSet<Integer> set = new HashSet<>();
+        // https://www.baeldung.com/java-listing-numbers-within-a-range
+        List<Integer> possibleValues = IntStream.rangeClosed(1, NUMBER_OF_ROWS).boxed().collect(Collectors.toList());
+        List<Integer> allowedValues;
 
         for (int rowNumber = 0; rowNumber < matrix.length; rowNumber++) {
             for (int columnNumber = 0; columnNumber < matrix[rowNumber].length; columnNumber++) {
 
-                // https://howtodoinjava.com/java/array/intersection-between-arrays/
-                
-                set.addAll(Arrays.asList(allAllowedValues));
+                allowedValues = new ArrayList<>(possibleValues);
 
-                set.removeAll(getRowValues(rowNumber));
-                set.removeAll(getColumnValues(columnNumber));
-                set.removeAll(getSquareValues(rowNumber, columnNumber));
+                allowedValues.removeAll(getRowValues(rowNumber));
+                allowedValues.removeAll(getColumnValues(columnNumber));
+                allowedValues.removeAll(getSectionValues(rowNumber, columnNumber));
 
-                int[] allowedValues = set.stream().mapToInt(Integer::intValue).toArray();
-                
-                if (allowedValues.length == 0) {
+                // Value generation can cause a situation with no allowed values at all.
+                // If it happens, generation is re-started.
+                if (allowedValues.size() == 0) {
                     generateMatrix();
                     return;
                 }
 
-                matrix[rowNumber][columnNumber] = allowedValues[r.nextInt(allowedValues.length)];
+                matrix[rowNumber][columnNumber] = allowedValues.get(r.nextInt(allowedValues.size()));
                 
-                set.clear();
-
             }
         }
         
