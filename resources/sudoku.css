@@ -17,4 +17,5 @@ Button {
     -fx-min-height: 50;
     -fx-font-family: monospace;
     -fx-font-size: 20;
+    -fx-font-weight: bold;
 }
