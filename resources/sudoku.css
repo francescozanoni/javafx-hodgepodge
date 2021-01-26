@@ -1,0 +1,20 @@
+.mainGrid {
+    -fx-padding: 2;
+    -fx-hgap: 0;
+    -fx-vgap: 0;
+    -fx-pref-width: 200;
+    -fx-pref-height: 200;
+}
+
+.sectionGrid {
+    -fx-padding: 1;
+    -fx-hgap: 0;
+    -fx-vgap: 0;
+}
+
+Button {
+    -fx-min-width: 50;
+    -fx-min-height: 50;
+    -fx-font-family: monospace;
+    -fx-font-size: 20;
+}

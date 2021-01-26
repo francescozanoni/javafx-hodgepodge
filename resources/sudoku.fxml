@@ -1,25 +1,118 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
 
 <VBox fx:controller="sample.controllers.Sudoku"
       xmlns:fx="http://javafx.com/fxml"
-      stylesheets="@style.css"
+      stylesheets="@style.css,@sudoku.css"
       styleClass="root">
     <!-- The "@" symbol means the style sheet is in the same directory as the FXML file -->
     <!-- @see https://www.callicoder.com/javafx-css-tutorial -->
 
     <fx:include source="menu.fxml"/>
 
-    <GridPane>
-
-        <TextArea fx:id="textArea"
-                  editable="false"
-                  GridPane.rowIndex="0"
-                  GridPane.columnIndex="0"/>
-
+    <GridPane styleClass="mainGrid">
+        <GridPane styleClass="sectionGrid" GridPane.rowIndex="0" GridPane.columnIndex="0">
+            <Button GridPane.rowIndex="0" GridPane.columnIndex="0">X</Button>
+            <Button GridPane.rowIndex="0" GridPane.columnIndex="1">X</Button>
+            <Button GridPane.rowIndex="0" GridPane.columnIndex="2">X</Button>
+            <Button GridPane.rowIndex="1" GridPane.columnIndex="0">X</Button>
+            <Button GridPane.rowIndex="1" GridPane.columnIndex="1">X</Button>
+            <Button GridPane.rowIndex="1" GridPane.columnIndex="2">X</Button>
+            <Button GridPane.rowIndex="2" GridPane.columnIndex="0">X</Button>
+            <Button GridPane.rowIndex="2" GridPane.columnIndex="1">X</Button>
+            <Button GridPane.rowIndex="2" GridPane.columnIndex="2">X</Button>
+        </GridPane>
+        <GridPane styleClass="sectionGrid" GridPane.rowIndex="0" GridPane.columnIndex="1">
+            <Button GridPane.rowIndex="0" GridPane.columnIndex="0">X</Button>
+            <Button GridPane.rowIndex="0" GridPane.columnIndex="1">X</Button>
+            <Button GridPane.rowIndex="0" GridPane.columnIndex="2">X</Button>
+            <Button GridPane.rowIndex="1" GridPane.columnIndex="0">X</Button>
+            <Button GridPane.rowIndex="1" GridPane.columnIndex="1">X</Button>
+            <Button GridPane.rowIndex="1" GridPane.columnIndex="2">X</Button>
+            <Button GridPane.rowIndex="2" GridPane.columnIndex="0">X</Button>
+            <Button GridPane.rowIndex="2" GridPane.columnIndex="1">X</Button>
+            <Button GridPane.rowIndex="2" GridPane.columnIndex="2">X</Button>
+        </GridPane>
+        <GridPane styleClass="sectionGrid" GridPane.rowIndex="0" GridPane.columnIndex="2">
+            <Button GridPane.rowIndex="0" GridPane.columnIndex="0">X</Button>
+            <Button GridPane.rowIndex="0" GridPane.columnIndex="1">X</Button>
+            <Button GridPane.rowIndex="0" GridPane.columnIndex="2">X</Button>
+            <Button GridPane.rowIndex="1" GridPane.columnIndex="0">X</Button>
+            <Button GridPane.rowIndex="1" GridPane.columnIndex="1">X</Button>
+            <Button GridPane.rowIndex="1" GridPane.columnIndex="2">X</Button>
+            <Button GridPane.rowIndex="2" GridPane.columnIndex="0">X</Button>
+            <Button GridPane.rowIndex="2" GridPane.columnIndex="1">X</Button>
+            <Button GridPane.rowIndex="2" GridPane.columnIndex="2">X</Button>
+        </GridPane>
+        <GridPane styleClass="sectionGrid" GridPane.rowIndex="1" GridPane.columnIndex="0">
+            <Button GridPane.rowIndex="0" GridPane.columnIndex="0">X</Button>
+            <Button GridPane.rowIndex="0" GridPane.columnIndex="1">X</Button>
+            <Button GridPane.rowIndex="0" GridPane.columnIndex="2">X</Button>
+            <Button GridPane.rowIndex="1" GridPane.columnIndex="0">X</Button>
+            <Button GridPane.rowIndex="1" GridPane.columnIndex="1">X</Button>
+            <Button GridPane.rowIndex="1" GridPane.columnIndex="2">X</Button>
+            <Button GridPane.rowIndex="2" GridPane.columnIndex="0">X</Button>
+            <Button GridPane.rowIndex="2" GridPane.columnIndex="1">X</Button>
+            <Button GridPane.rowIndex="2" GridPane.columnIndex="2">X</Button>
+        </GridPane>
+        <GridPane styleClass="sectionGrid" GridPane.rowIndex="1" GridPane.columnIndex="1">
+            <Button GridPane.rowIndex="0" GridPane.columnIndex="0">X</Button>
+            <Button GridPane.rowIndex="0" GridPane.columnIndex="1">X</Button>
+            <Button GridPane.rowIndex="0" GridPane.columnIndex="2">X</Button>
+            <Button GridPane.rowIndex="1" GridPane.columnIndex="0">X</Button>
+            <Button GridPane.rowIndex="1" GridPane.columnIndex="1">X</Button>
+            <Button GridPane.rowIndex="1" GridPane.columnIndex="2">X</Button>
+            <Button GridPane.rowIndex="2" GridPane.columnIndex="0">X</Button>
+            <Button GridPane.rowIndex="2" GridPane.columnIndex="1">X</Button>
+            <Button GridPane.rowIndex="2" GridPane.columnIndex="2">X</Button>
+        </GridPane>
+        <GridPane styleClass="sectionGrid" GridPane.rowIndex="1" GridPane.columnIndex="2">
+            <Button GridPane.rowIndex="0" GridPane.columnIndex="0">X</Button>
+            <Button GridPane.rowIndex="0" GridPane.columnIndex="1">X</Button>
+            <Button GridPane.rowIndex="0" GridPane.columnIndex="2">X</Button>
+            <Button GridPane.rowIndex="1" GridPane.columnIndex="0">X</Button>
+            <Button GridPane.rowIndex="1" GridPane.columnIndex="1">X</Button>
+            <Button GridPane.rowIndex="1" GridPane.columnIndex="2">X</Button>
+            <Button GridPane.rowIndex="2" GridPane.columnIndex="0">X</Button>
+            <Button GridPane.rowIndex="2" GridPane.columnIndex="1">X</Button>
+            <Button GridPane.rowIndex="2" GridPane.columnIndex="2">X</Button>
+        </GridPane>
+        <GridPane styleClass="sectionGrid" GridPane.rowIndex="2" GridPane.columnIndex="0">
+            <Button GridPane.rowIndex="0" GridPane.columnIndex="0">X</Button>
+            <Button GridPane.rowIndex="0" GridPane.columnIndex="1">X</Button>
+            <Button GridPane.rowIndex="0" GridPane.columnIndex="2">X</Button>
+            <Button GridPane.rowIndex="1" GridPane.columnIndex="0">X</Button>
+            <Button GridPane.rowIndex="1" GridPane.columnIndex="1">X</Button>
+            <Button GridPane.rowIndex="1" GridPane.columnIndex="2">X</Button>
+            <Button GridPane.rowIndex="2" GridPane.columnIndex="0">X</Button>
+            <Button GridPane.rowIndex="2" GridPane.columnIndex="1">X</Button>
+            <Button GridPane.rowIndex="2" GridPane.columnIndex="2">X</Button>
+        </GridPane>
+        <GridPane styleClass="sectionGrid" GridPane.rowIndex="2" GridPane.columnIndex="1">
+            <Button GridPane.rowIndex="0" GridPane.columnIndex="0">X</Button>
+            <Button GridPane.rowIndex="0" GridPane.columnIndex="1">X</Button>
+            <Button GridPane.rowIndex="0" GridPane.columnIndex="2">X</Button>
+            <Button GridPane.rowIndex="1" GridPane.columnIndex="0">X</Button>
+            <Button GridPane.rowIndex="1" GridPane.columnIndex="1">X</Button>
+            <Button GridPane.rowIndex="1" GridPane.columnIndex="2">X</Button>
+            <Button GridPane.rowIndex="2" GridPane.columnIndex="0">X</Button>
+            <Button GridPane.rowIndex="2" GridPane.columnIndex="1">X</Button>
+            <Button GridPane.rowIndex="2" GridPane.columnIndex="2">X</Button>
+        </GridPane>
+        <GridPane styleClass="sectionGrid" GridPane.rowIndex="2" GridPane.columnIndex="2">
+            <Button GridPane.rowIndex="0" GridPane.columnIndex="0">X</Button>
+            <Button GridPane.rowIndex="0" GridPane.columnIndex="1">X</Button>
+            <Button GridPane.rowIndex="0" GridPane.columnIndex="2">X</Button>
+            <Button GridPane.rowIndex="1" GridPane.columnIndex="0">X</Button>
+            <Button GridPane.rowIndex="1" GridPane.columnIndex="1">X</Button>
+            <Button GridPane.rowIndex="1" GridPane.columnIndex="2">X</Button>
+            <Button GridPane.rowIndex="2" GridPane.columnIndex="0">X</Button>
+            <Button GridPane.rowIndex="2" GridPane.columnIndex="1">X</Button>
+            <Button GridPane.rowIndex="2" GridPane.columnIndex="2">X</Button>
+        </GridPane>
     </GridPane>
 
 </VBox>
